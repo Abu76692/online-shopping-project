@@ -1,0 +1,146 @@
+{% extends 'shop_app/navigation.html' %}
+{% load static %}
+{% block content %}
+<div class="checkout-wrapper">
+    <div class="checkout-container">
+        <form action="/payment/success" method="POST">
+            {% csrf_token %}
+            <h1>Address</h1>
+
+            <!-- Simplified Form Fields -->
+            <label for="phone_number">Phone Number:</label>
+            <input type="text" id="phone_number" class="input-field" name="phone_number" required>
+
+            <label for="address_line1">Address:</label>
+            <input type="text" id="address_line1" class="input-field address-input" name="address_line1" required>
+
+            <label for="postal_code">Postal Code:</label>
+            <input type="text" id="postal_code" class="input-field" name="postal_code" required>
+
+            <!-- Razorpay Payment Button -->
+            <div class="razorpay-button">
+                <button id="rzp-button" class="razorpay-btn">Pay with Razorpay</button>
+            </div>
+
+            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+            <script>
+                const options = {
+                    "key": "{{ razorpay_key_id }}",
+                    "amount": "{{ amount }}",
+                    "currency": "INR",
+                    "name": "Your Shop Name",
+                    "description": "Complete your purchase",
+                    "image": "https://your-site.com/logo.png",
+                    "order_id": "{{ razorpay_order_id }}",
+                    "theme": {
+                        "color": "#F37254"
+                    },
+                    "handler": function (response) {
+                        alert("Payment successful!");
+                        document.forms[0].submit();
+                    }
+                };
+                const rzp = new Razorpay(options);
+
+                document.getElementById('rzp-button').onclick = function (e) {
+                    rzp.open();
+                    e.preventDefault();
+                }
+            </script>
+        </form>
+    </div>
+</div>
+
+<!-- Inline CSS -->
+<style>
+    /* Global Reset for Checkout Section Only */
+    .checkout-wrapper * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .checkout-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .checkout-container {
+        width: 100%;
+        max-width: 500px;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .checkout-container h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .checkout-container label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 6px;
+        color: #555;
+    }
+
+    .checkout-container .input-field {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        transition: border-color 0.3s;
+    }
+
+    .checkout-container .input-field:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+    /* Address Input Styling */
+    .checkout-container .address-input {
+        border-color: #28a745;
+    }
+
+    .checkout-container .address-input:focus {
+        border-color: #218838;
+    }
+
+    /* Razorpay Button Styling */
+    .checkout-container .razorpay-button {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .checkout-container .razorpay-btn {
+        background-color: #f37254;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    .checkout-container .razorpay-btn:hover {
+        background-color: #d95a38;
+    }
+
+    /* Mobile View Adjustments */
+    @media (max-width: 600px) {
+        .checkout-container {
+            padding: 20px;
+        }
+    }
+</style>
+
+{% endblock %}

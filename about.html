@@ -1,0 +1,121 @@
+{% extends 'shop_app/navigation.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About ROHITbuy</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h1, h2 {
+            color: #ff6600;
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.6em;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding: 5px 0;
+            font-size: 1.1em;
+        }
+
+        /* Main Section */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .about-section {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-content h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .about-content h2 {
+            font-size: 2em;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        .about-content p {
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1em;
+        }
+
+    </style>
+</head>
+<body>
+    <main>
+        <section class="about-section">
+            <div class="about-content">
+                <h1>About ROHITbuy</h1>
+                <p>Welcome to ROHITbuy, your ultimate online shopping destination! Our mission is to offer a seamless and secure shopping experience, providing you with the best products at competitive prices.</p>
+                
+                <h2>Our Story</h2>
+                <p>Founded with a vision to create an online shopping platform that prioritizes customer satisfaction, ROHITbuy has grown to become one of the most trusted names in e-commerce. Whether you're looking for the latest gadgets, fashion, home essentials, or exclusive deals, we've got you covered.</p>
+                
+                <h2>Our Values</h2>
+                <ul>
+                    <li>Customer-centric service</li>
+                    <li>Quality products at affordable prices</li>
+                    <li>Easy and secure checkout process</li>
+                    <li>Timely deliveries</li>
+                    <li>Outstanding customer support</li>
+                </ul>
+                
+                <h2>Contact Us</h2>
+                <p>If you have any questions or need assistance, feel free to reach out to our support team at <strong>support@rohitbuy.com</strong>.</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 ROHITbuy. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+{% endblock %}

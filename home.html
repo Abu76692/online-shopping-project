@@ -1,0 +1,42 @@
+{% extends 'shop_app/navigation.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-image: url("{% static 'shop_app/home.jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .image-container {
+            margin-top: 80px; /* Add space between navbar and image */
+            text-align: center; /* Center the image horizontally */
+        }
+        img {
+            width: 300px; /* Adjust width as per requirement */
+            height: auto;
+            margin-bottom: 20px; /* Space below the image */
+            display: block; /* Ensure the image is treated as a block element */
+            margin-left: auto; /* Center the image */
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="{% static 'shop_app/logo.jpg' %}" alt="image">
+    </div>
+</body>
+{% endblock %}

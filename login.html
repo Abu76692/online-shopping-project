@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>Login</title>
+    <style>
+        /* Body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-image: url("{% static 'shop_app/bgimage.jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Vertically center content */
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        /* Styling the logo image */
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px; /* Reduced space below the image */
+        }
+
+        img {
+            width: 180px;  /* Reduced image size */
+            height: auto;
+        }
+
+        /* Form styling */
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px;  /* Reduced padding */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;  /* Reduced form width */
+        }
+
+        h2 {
+            color: #007bff;
+            text-align: center;
+            font-size: 22px;  /* Reduced font size */
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;  /* Reduced space above input fields */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;  /* Reduced padding */
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px;  /* Reduced padding */
+            margin-top: 15px;  /* Reduced margin */
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;  /* Reduced margin */
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="{% static 'shop_app/logo.jpg' %}" alt="Logo">
+    </div>
+    <div class="form-container">
+        <form method="post">
+            <h2>Login</h2>
+            {% csrf_token %}
+            <label>Username or Email:</label>
+            <input type="text" name="login_input" required>
+            
+            <label>Password:</label>
+            <input type="password" name="password" required>
+            
+            <button type="submit">Login</button>
+            <a href="{% url 'signup' %}">Don't have an account? Sign Up</a>
+            
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>My Website</title>
+
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Combined CSS -->
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        /* Navigation Bar Styles */
+        .navbar {
+            background-color: hsl(79, 100%, 50%);
+            padding: 10px 15px;  /* Reduced padding to decrease width */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 5px solid blue;
+        }
+
+        /* Navigation Links Styling */
+        .nav-left, .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            padding: 8px 12px; /* Reduced padding */
+            font-size: 16px;  /* Reduced font size */
+            position: relative;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+
+        /* Assign Fixed Colors to Each Navigation Link */
+        .home { color: brown; }       
+        .products { color: brown; }
+        .about {color: brown;}   
+        .cart { color: brown; }       
+        .logout { color: brown; }     
+
+        /* Logo Styling */
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-img {
+            width: 30px; /* Reduced logo size */
+            height: auto;
+            margin-right: 8px;  /* Adjusted space between logo and text */
+        }
+
+        /* Hover Effect for Navigation Links */
+        .nav-link:hover {
+            color: hsl(314, 100%, 67%);
+        }
+
+        /* Background Underline Effect */
+        .nav-link::after {
+            content: '';
+            display: block;
+            height: 3px;
+            width: 0;
+            background-color: #ffdd57;
+            transition: width 0.3s ease;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Search Form Styling */
+        .search-form {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: white;
+            border-radius: 20px;
+            padding: 5px 10px;  /* Reduced padding */
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-form input[type="text"] {
+            border: none;
+            outline: none;
+            padding: 6px 10px;  /* Reduced padding */
+            font-size: 14px;  /* Reduced font size */
+            border-radius: 15px;
+            margin-right: 8px; /* Adjusted margin */
+            width: 160px; /* Reduced width */
+        }
+
+        .search-form button {
+            background-color: hsl(79, 100%, 50%);
+            color: white;
+            border: none;
+            padding: 6px 12px;  /* Reduced padding */
+            font-size: 14px;  /* Reduced font size */
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-form button:hover {
+            background-color: hsl(314, 100%, 67%);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <!-- Left Navigation Links -->
+        <div class="nav-left">
+            <a href="{% url 'home' %}" class="nav-link home">
+                <img src="https://img.icons8.com/ios/30/000000/home.png" alt="Home" class="logo-img"> Home
+            </a>
+            <a href="{% url 'prd' %}" class="nav-link products">
+                <img src="https://img.icons8.com/ios/30/000000/product.png" alt="Products" class="logo-img"> Our Products
+            </a>
+            <a href="{% url 'about' %}" class="nav-link about">
+                <img src="https://img.icons8.com/ios/30/000000/info.png" alt="About" class="logo-img"> About
+            </a>
+        </div>
+
+        <!-- Center Logo -->
+        <div class="logo">
+            <img src="{% static 'shop_app/logo.jpg' %}" alt="Logo" class="logo-img">
+        </div>
+
+        <!-- Right Navigation Links -->
+        <div class="nav-right">
+            <!-- Search Form -->
+            <form action="{% url 'search_results' %}" method="GET" class="search-form">
+                <input type="text" name="q" placeholder="Search..." />
+                <button type="submit">
+                    <img src="https://img.icons8.com/ios/30/000000/search.png" alt="Search" class="logo-img">
+                </button>
+            </form>
+            <a href="{% url 'cart_view' %}" class="nav-link cart">
+                <img src="https://img.icons8.com/ios/30/000000/shopping-cart.png" alt="Cart" class="logo-img"> Cart
+            </a>
+            <a href="{% url 'logout' %}" class="nav-link logout">
+                <img src="https://img.icons8.com/ios/30/000000/logout-rounded.png" alt="Logout" class="logo-img"> Logout
+            </a>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

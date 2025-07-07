@@ -1,0 +1,159 @@
+{% extends 'shop_app/navigation.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>Document</title>
+    <style>
+        /* Style for the body */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Center content and style the main heading */
+        h1 {
+            color: #840e62;
+           font-family: 'Times New Roman', Times, serif;
+            margin-bottom: 20px;
+        }
+
+        /* Style for the list items */
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            width: 30%;
+            margin: 10px 0;
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        li img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Style table headers */
+        th {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+        }
+
+        /* Style table data */
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        /* Add a hover effect on rows */
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Style the form inputs and buttons */
+        input[type="number"] {
+            width: 50px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        /* Style the action links */
+        a {
+            color: #dc3545;
+            text-decoration: none;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            transition: color 0.3s, border-color 0.3s;
+        }
+
+        a:hover {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        /* Style for the total amount section */
+        h3 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        /* Style the home link */
+        .home-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007bff;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        .home-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>CART ITEMS</h1>
+        <ul>
+            {% for j in cart_items %}
+                <li>
+                    {% if j.product.image %}
+                        <img src="{{ j.product.image.url }}" alt="Product Image">
+                    {% else %}
+                        <p>No Image Available</p>
+                    {% endif %}
+                    <p>{{ j.product.name }}</p>
+                    <form method="post" action="{% url 'update_cart' j.product.id %}">
+                        {% csrf_token %}
+                        <input type="number" name="quantity" value="{{ j.quantity }}">
+                        <button type="submit">UPDATE</button>
+                    </form>
+                    <p>₹{{ j.get_total }}</p>
+                    <a href="{% url 'order_createfromcart' j.product.id %}">BUY</a>
+                    <a href="{% url 'remove_cart' j.product.id %}">REMOVE</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <h3>total amount: ₹{{ total_amount }}</h3>
+        <a href="{% url 'order_create_all' %}">BUY</a>
+    </center>
+</body>
+</html>
+{% endblock %}

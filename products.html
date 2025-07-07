@@ -1,0 +1,116 @@
+{% extends 'shop_app/navigation.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>Product List</title>
+    <style>
+        /* Scope styles to the .product-container class to avoid conflicts */
+        .product-container {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Main heading inside the product container */
+        .product-container h1 {
+            color: brown;
+            margin-bottom: 20px;
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Style the unordered list inside the product container */
+        .product-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        /* Product item styling */
+        .product-container .product-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background-color: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Product image styling */
+        .product-container .product-item img {
+            width: 150px;
+            height: 150px;
+            border-radius: 5px;
+        }
+
+        /* Product title styling */
+        .product-container h2 {
+            color: #007bff;
+            margin: 0 0 10px 0;
+        }
+
+        /* Price and other text */
+        .product-container p {
+            margin: 5px 0;
+            color: #28a745;
+        }
+
+        /* Description list styling */
+        .product-container .description-list {
+            margin: 0;
+            padding-left: 20px;
+            color: black;
+        }
+
+        /* Add-to-cart button styling */
+        .product-container a {
+            display: inline-block;
+            background-color: #28a745;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .product-container a:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="product-container">
+        <h1>Our Products</h1>
+        <ul>
+            {% for j in data %}
+            <li class="product-item">
+                {% if j.image %}
+                    <img src="{{ j.image.url }}" alt="Product Image">
+                {% else %}
+                    <p>No Image Available</p>
+                {% endif %}
+
+                <div>
+                    <h2>{{ j.name }}</h2>  
+                    <p>Price: ₹{{ j.price }}</p>
+                    <ul class="description-list">
+                        {% for point in j.description.splitlines %}
+                        <li>{{ point }}</li>
+                        {% endfor %}
+                    </ul>
+                    <a href="{% url 'add_to_cart' j.id %}">ADD TO CART</a>
+                    <a href="{% url 'order_create' j.id %}">BUY</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+{% endblock %}
